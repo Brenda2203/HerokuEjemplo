@@ -1,5 +1,6 @@
 package dao;
 
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ public class MensajeDAO {
 
     private Connection connection;
 
-    public MensajeDAO() {
+    public MensajeDAO() throws URISyntaxException {
         connection = DbUtil.getConnection();
     }
 

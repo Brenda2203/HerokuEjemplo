@@ -4,6 +4,7 @@ import dao.HorarioDAO;
 import dao.TrabajadorDAO;
 import dao.TrabajoARealizarDAO;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -24,7 +25,12 @@ public class HorarioC extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action.equals("delete")) {
-            HorarioDAO h = new HorarioDAO();
+            HorarioDAO h = null;
+            try {
+                h = new HorarioDAO();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(HorarioC.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ArrayList<Horario> horarios = new ArrayList();
             try {
                 horarios = h.getAllHorarios();
@@ -35,11 +41,26 @@ public class HorarioC extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/HorarioD.jsp");
             rd.forward(request, response);
         }
-        TrabajadorDAO u = new TrabajadorDAO();
+        TrabajadorDAO u = null;
+        try {
+            u = new TrabajadorDAO();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(HorarioC.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<Trabajador> usuarios = new ArrayList<>();
-        TrabajoARealizarDAO t = new TrabajoARealizarDAO();
+        TrabajoARealizarDAO t = null;
+        try {
+            t = new TrabajoARealizarDAO();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(HorarioC.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<TrabajoARealizar> trabajos = new ArrayList();
-        HorarioDAO h = new HorarioDAO();
+        HorarioDAO h = null;
+        try {
+            h = new HorarioDAO();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(HorarioC.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<Horario> horarios = new ArrayList();
         try {
             trabajos = t.getAllTrabajosARealizar();
@@ -77,7 +98,12 @@ public class HorarioC extends HttpServlet {
             String horaFinal = request.getParameter("horaF1") + "" + request.getParameter("horaF2");
             int horaF = Integer.parseInt(horaFinal);
             String fecha = request.getParameter("fechaD") + "/" + request.getParameter("fechaM") + "/" + request.getParameter("fechaA");
-            HorarioDAO h = new HorarioDAO();
+            HorarioDAO h = null;
+            try {
+                h = new HorarioDAO();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(HorarioC.class.getName()).log(Level.SEVERE, null, ex);
+            }
             Horario horario = new Horario(0, idT, idU, horaI, horaF, fecha, 0);
             try {
                 h.addHorario(horario);
@@ -86,9 +112,19 @@ public class HorarioC extends HttpServlet {
             }
             response.sendRedirect("menu.html");
         } else {
-            TrabajadorDAO u = new TrabajadorDAO();
+            TrabajadorDAO u = null;
+            try {
+                u = new TrabajadorDAO();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(HorarioC.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ArrayList<Trabajador> usuarios = new ArrayList<>();
-            TrabajoARealizarDAO t = new TrabajoARealizarDAO();
+            TrabajoARealizarDAO t = null;
+            try {
+                t = new TrabajoARealizarDAO();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(HorarioC.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ArrayList<TrabajoARealizar> trabajos = new ArrayList();
             try {
                 trabajos = t.getAllTrabajosARealizar();

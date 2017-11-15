@@ -2,6 +2,7 @@ package Controlador;
 
 import dao.EmpresaClienteDAO;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,7 +22,12 @@ public class EmpresaM extends HttpServlet {
         String usuario = request.getParameter("usuario");
         String password = request.getParameter("password");
         int idE = Integer.parseInt(request.getParameter("empresa"));
-        EmpresaClienteDAO e = new EmpresaClienteDAO();
+        EmpresaClienteDAO e = null;
+        try {
+            e = new EmpresaClienteDAO();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(EmpresaM.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (usuario.equals("root") && password.equals("root")) {
             try {
                 e.deleteEmpresa(idE);
@@ -51,7 +57,12 @@ public class EmpresaM extends HttpServlet {
         String nombre=request.getParameter("empresa");
         String pass=request.getParameter("password");
         String direccion=request.getParameter("direccion");
-        EmpresaClienteDAO e=new EmpresaClienteDAO();
+        EmpresaClienteDAO e = null;
+        try {
+            e = new EmpresaClienteDAO();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(EmpresaM.class.getName()).log(Level.SEVERE, null, ex);
+        }
         EmpresaCliente empresaM=new EmpresaCliente();
         try {
             empresaM=e.getEmpresaById(idU);

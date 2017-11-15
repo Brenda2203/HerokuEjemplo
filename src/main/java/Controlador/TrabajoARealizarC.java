@@ -4,6 +4,7 @@ import dao.EmpresaClienteDAO;
 import dao.ServicioDAO;
 import dao.TrabajoARealizarDAO;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -25,9 +26,19 @@ public class TrabajoARealizarC extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action.equals("create")) {
-            ServicioDAO s = new ServicioDAO();
+            ServicioDAO s = null;
+            try {
+                s = new ServicioDAO();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(TrabajoARealizarC.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ArrayList<Servicio> servicios = new ArrayList<>();
-            EmpresaClienteDAO e = new EmpresaClienteDAO();
+            EmpresaClienteDAO e = null;
+            try {
+                e = new EmpresaClienteDAO();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(TrabajoARealizarC.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ArrayList<EmpresaCliente> empresas = new ArrayList<>();
             try {
                 servicios = s.getAllServicios();
@@ -40,7 +51,12 @@ public class TrabajoARealizarC extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/TaRC.jsp");
             rd.forward(request, response);
         }
-        TrabajoARealizarDAO t = new TrabajoARealizarDAO();
+        TrabajoARealizarDAO t = null;
+        try {
+            t = new TrabajoARealizarDAO();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(TrabajoARealizarC.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<TrabajoARealizar> trabajos = new ArrayList<>();
         try {
             trabajos = t.getAllTrabajosARealizar();
@@ -65,7 +81,12 @@ public class TrabajoARealizarC extends HttpServlet {
         int idS = Integer.parseInt(request.getParameter("idS"));
         int urgencia = Integer.parseInt(request.getParameter("urgencia"));
         String detalles = request.getParameter("detalles");
-        TrabajoARealizarDAO t = new TrabajoARealizarDAO();
+        TrabajoARealizarDAO t = null;
+        try {
+            t = new TrabajoARealizarDAO();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(TrabajoARealizarC.class.getName()).log(Level.SEVERE, null, ex);
+        }
         TrabajoARealizar tar = new TrabajoARealizar(0, idE, idS, urgencia, detalles, 0);
         try {
             t.addTrabajoARealizar(tar);

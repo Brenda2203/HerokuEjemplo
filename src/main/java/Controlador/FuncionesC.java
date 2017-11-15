@@ -4,6 +4,7 @@ import dao.FuncionesDAO;
 import dao.ServicioDAO;
 import dao.TrabajadorDAO;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -23,9 +24,19 @@ public class FuncionesC extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        ServicioDAO s = new ServicioDAO();
+        ServicioDAO s = null;
+        try {
+            s = new ServicioDAO();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(FuncionesC.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<Servicio> servicios = new ArrayList<>();
-        TrabajadorDAO t = new TrabajadorDAO();
+        TrabajadorDAO t = null;
+        try {
+            t = new TrabajadorDAO();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(FuncionesC.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<Trabajador> usuarios = new ArrayList<>();
         try {
             servicios = s.getAllServicios();
@@ -55,7 +66,12 @@ public class FuncionesC extends HttpServlet {
         int idU = Integer.parseInt(request.getParameter("idU"));
         int idS = Integer.parseInt(request.getParameter("idS"));
         int valoracion = Integer.parseInt(request.getParameter("valoracion"));
-        FuncionesDAO f = new FuncionesDAO();
+        FuncionesDAO f = null;
+        try {
+            f = new FuncionesDAO();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(FuncionesC.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Funciones funcion = new Funciones();
         try {
             funcion = f.getFuncionesByIds(idS, idU);
@@ -63,9 +79,19 @@ public class FuncionesC extends HttpServlet {
             Logger.getLogger(FuncionesC.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (funcion != null) {
-            ServicioDAO s = new ServicioDAO();
+            ServicioDAO s = null;
+            try {
+                s = new ServicioDAO();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(FuncionesC.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ArrayList<Servicio> servicios = new ArrayList<>();
-            TrabajadorDAO t = new TrabajadorDAO();
+            TrabajadorDAO t = null;
+            try {
+                t = new TrabajadorDAO();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(FuncionesC.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ArrayList<Trabajador> usuarios = new ArrayList<>();
             try {
                 servicios = s.getAllServicios();

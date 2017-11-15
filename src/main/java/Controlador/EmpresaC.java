@@ -2,6 +2,7 @@ package Controlador;
 
 import dao.EmpresaClienteDAO;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -19,7 +20,12 @@ public class EmpresaC extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        EmpresaClienteDAO e = new EmpresaClienteDAO();
+        EmpresaClienteDAO e = null;
+        try {
+            e = new EmpresaClienteDAO();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(EmpresaC.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<EmpresaCliente> empresas = new ArrayList<>();
         try {
             empresas = e.getAllEmpresas();
@@ -45,7 +51,12 @@ public class EmpresaC extends HttpServlet {
         String nombre = request.getParameter("nombreE");
         int NIT = Integer.parseInt(request.getParameter("NIT"));
         String direccion = request.getParameter("direccion");
-        EmpresaClienteDAO e = new EmpresaClienteDAO();
+        EmpresaClienteDAO e = null;
+        try {
+            e = new EmpresaClienteDAO();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(EmpresaC.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<EmpresaCliente> empresas = new ArrayList<>();
         try {
             empresas = e.getAllEmpresas();
