@@ -18,6 +18,33 @@ public class TrabajadorDAO {
         connection = DbUtil.getConnection();
     }
 
+    public Trabajador validar(Trabajador usuario) {
+        try {
+            PreparedStatement preparedStatement = null;
+            String consulta = "SELECT * FROM USUARIO WHERE usuarioT=? AND passwordT=?";
+            preparedStatement = connection.prepareStatement(consulta);
+            preparedStatement.setString(1, usuario.getUsuarioT());
+            preparedStatement.setString(2, usuario.getPasswordT());
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String login = rs.getString("usuarioT");
+                String pass = rs.getString("passwordT");
+                Trabajador sesion = new Trabajador();
+                sesion.setUsuarioT(login);
+                sesion.setPasswordT(pass);
+                sesion.setIdUsuario(id);
+                return sesion;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void addTrabajador(Trabajador t) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("insert into trabajador(usuarioT,passwordT,nombre,cargo,supervisor,estado) values (?,?,?,?,?,1)");
         preparedStatement.setString(1, t.getUsuarioT());

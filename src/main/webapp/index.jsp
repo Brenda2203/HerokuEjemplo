@@ -33,13 +33,20 @@
                             <p><a class="tm-btn-white-big" href="menu.html" role="button">Empezar</a></p>
                         </div>            
                     </div>
-                </section>    
+                </section>
+
+                <div>Formulario de Autenticacion</div>
+                <form action="Login" method="POST">
+                    Usuario <input type="text" name="usuarioT"/>
+                    Contrasena <input type="text" name="passwordT"/>
+                    <input type="submit" name="submit"/> 
+                </form>
 
             </div>
 
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <p class="text-xs-center tm-copyright-text">Sara Chamseddine, Brenda MÃ©ndez, Ã“scar Romero Â© (2017)</p>
+                    <p class="text-xs-center tm-copyright-text">Sara Chamseddine, Brenda Méndez, Óscar Romero © (2017)</p>
                 </div>
             </div>
 
