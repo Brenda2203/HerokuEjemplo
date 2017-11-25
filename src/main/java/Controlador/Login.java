@@ -1,4 +1,3 @@
-
 package Controlador;
 
 import dao.TrabajadorDAO;
@@ -6,7 +5,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +18,7 @@ public class Login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesionUsuario = request.getSession();
-        Usuario _sesionUsuario = (Usuario) sesionUsuario.getAttribute("usuario");
+        Trabajador _sesionUsuario = (Trabajador) sesionUsuario.getAttribute("usuario");
         if (_sesionUsuario != null) {
             sesionUsuario.invalidate();
             response.sendRedirect("index.jsp");
@@ -33,7 +31,7 @@ public class Login extends HttpServlet {
 
         String login = request.getParameter("usuario");
         String pass = request.getParameter("pass");
-        
+        //Validaciones que deben ser realizadas
         Trabajador datosUsuario = new Trabajador();
         datosUsuario.setUsuarioT(login);
         datosUsuario.setPasswordT(pass);
@@ -47,27 +45,33 @@ public class Login extends HttpServlet {
         }
         Trabajador sesion = userDao.validar(datosUsuario);
         HttpSession sesionUsuario = request.getSession();
-        Usuario _sesionUsuario = (Usuario) sesionUsuario.getAttribute("usuarioT");
+        Trabajador _sesionUsuario = null;
+        try {
+            _sesionUsuario = (Trabajador) sesionUsuario.getAttribute("usuario");
+        } catch (Exception ex) {
+            response.sendRedirect("index.html");
+        }
+
         if (_sesionUsuario == null) {
             //El usuario no a creado la sesion
             if (sesion != null) {
-                sesionUsuario.setAttribute("usuarioT", sesion);
-                sesionUsuario.setMaxInactiveInterval(20);
-                response.sendRedirect("aplicacion.jsp");
+                sesionUsuario.setAttribute("usuario", sesion);
+                sesionUsuario.setMaxInactiveInterval(1800);
+                response.sendRedirect("menu.jsp");
             } else {
-                response.sendRedirect("error.jsp");
+                response.sendRedirect("index.html");
             }
 
         } else {
-            response.sendRedirect("aplicacion.jsp");
+            response.sendRedirect("menu.jsp");
         }
 
         if (sesion != null) {
 
         } else {
-            request.setAttribute("Error", "Revisar usuario/ pass");
-            RequestDispatcher rq = request.getRequestDispatcher("index.jsp");
-            rq.forward(request, response);
+            //request.setAttribute("Error", "Revisar usuario/ pass");
+            // RequestDispatcher rq =  request.getRequestDispatcher("index.html");
+            //rq.forward(request, response);
         }
 
     }

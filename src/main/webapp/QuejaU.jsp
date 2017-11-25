@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Eliminar Problema</title>
+        <title>Modificar Queja</title>
         <!--
         Ocean Theme
         http://www.templatemo.com/tm-484-ocean
@@ -38,36 +38,55 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-xs-center">
 
-                    <h2 class="tm-section-title">Eliminar Horario</h2>
+                    <h2 class="tm-section-title">Modificar Queja</h2>
                     <br><br>
 
                 </div>
                 <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 tm-form-group-left">
-                    <form align="center" action="ProblemaM" method="GET" class="tm-contact-form"> 
-                        <label align="center" for="idP">Problema a eliminar</label>
-                        <select name="idP" class="form-control form-control-lg">
+                    <form align="center" action="QuejaM" method="POST" class="tm-contact-form"> 
+                        <label align="center" for="idQ">Queja a Modificar</label>
+                        <select name="idQ" class="form-control form-control-lg">
+
                             <%
-                                if (request.getAttribute("problemas") != null) {
-                                    ArrayList<Problema> array = (ArrayList<Problema>) request.getAttribute("problemas");
-                                    for (Problema h : array) {
+                                if (request.getAttribute("quejas") != null) {
+                                    ArrayList<Queja> array = (ArrayList<Queja>) request.getAttribute("quejas");
+                                    for (Queja h : array) {
                             %>
-                            <option value="<%=h.getIdProblema()%>"><%=h.getNombre()%></option>
+                            <option value="<%=h.getIdQueja()%>"><%=h.getNombre()%></option>
+                            <%      }
+                                }
+                            %>
+                        </select> 
+                        <br>
+                        <label align="center" for="idU">Trabajo a Realizar</label>
+                        <select name="idU" class="form-control form-control-lg">
+                            <%
+                                if (request.getAttribute("trabajadores") != null) {
+                                    ArrayList<Trabajador> array = (ArrayList<Trabajador>) request.getAttribute("trabajadores");
+                                    for (Trabajador t : array) {
+                            %>
+                            <option value="<%=t.getIdUsuario()%>"><%=t.getNombre()%></option>
                             <%      }
                                 }
                             %>
                         </select>  
                         <br>
+                        <label align="center" for="nombre">Nombre</label>
+                        <input type="text" name="nombre" maxlength="300" class="form-control" placeholder="máx. 300"  required/>
                         <br>
-                        <button type="submit" class="btn tm-bordered-btn pull-xs-center">Eliminar</button>
+                        <label align="center" for="descripcion">Descripción</label>
+                        <input type="text" name="descripcion" maxlength="300" class="form-control" placeholder="máx. 300"  required/>
+                        <br>
+
+                        <br>
+                        <br>
+                        <button type="submit" class="btn tm-bordered-btn pull-xs-center">Modificar</button>
                         <a class="btn tm-bordered-btn pull-xs-center" href="menu.jsp" role="button">Volver</a>
                     </form>  
 
                 </div>                         
-
-
+                        
             </section>
-
-
 
         </div>
 

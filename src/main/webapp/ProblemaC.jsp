@@ -20,9 +20,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"><!-- Google web font "Open Sans", https://www.google.com/fonts/specimen/Open+Sans -->
         <link rel="stylesheet" href="font-awesome-4.5.0/css/font-awesome.min.css"> <!-- Font Awesome, https://fortawesome.github.io/Font-Awesome/ -->
         <link rel="stylesheet" href="css/bootstrap.min.css">                       <!-- Bootstrap style, http://v4-alpha.getbootstrap.com/ -->
-        <link rel="stylesheet" href="css/templatemo-style.css">
-        <link rel="stylesheet" href="css/proyecto.css"> <!-- Templatemo style -->
-
+        <link rel="stylesheet" href="css/templatemo-style.css">                    <!-- Templatemo style -->
+        <link rel="stylesheet" href="css/proyecto.css"> 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -39,48 +38,42 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-xs-center">
 
-                    <h2 class="tm-section-title">Agregar Empresa</h2>
+                    <h2 class="tm-section-title">Agregar Problema</h2>
                     <br><br>
 
                 </div>
-
-                <form align="center" action="EmpresaC" method="POST" class="tm-contact-form">                                
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 tm-form-group-left">
-                        <label align="center" for="nombre">Nombre de la Empresa</label>
-                        <input type="text" name="nombreE" maxlength="30" class="form-control" placeholder="máx. 30"  required/>
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 tm-form-group-left">
+                    <form align="center" action="ProblemaC" method="POST" class="tm-contact-form"> 
+                        <label align="center" for="idT">Trabajo a Realizar</label>
+                        <select name="idT" class="form-control form-control-lg">
+                            <%
+                                if (request.getAttribute("trabajos") != null) {
+                                    ArrayList<TrabajoARealizar> array = (ArrayList<TrabajoARealizar>) request.getAttribute("trabajos");
+                                    for (TrabajoARealizar t : array) {
+                            %>
+                            <option value="<%=t.getIdTrabajo()%>"><%=t.getDetalles()%></option>
+                            <%      }
+                                }
+                            %>
+                        </select>  
+                         
                         <br>
-                        <label align="center" for="NIT">NIT</label>
-                        <input type="text" name="NIT" maxlength="30" class="form-control" placeholder="máx. 10"  required/>
-                         <% 
-                        if(request.getAttribute("nit") != null){%>
-                            <h6 class="tm-2-col-text-description">Nit ya registrado</h6>
-                        <%}else{%>
-                            <br>
-                        <%}%>
-                        <label align="center" for="usuario">Usuario</label>
-                        <input type="text" name="usuario" maxlength="30" class="form-control" placeholder="máx. 30"  required/>
-                         <% 
-                        if(request.getAttribute("usuarioE") != null){%>
-                            <h6 class="tm-2-col-text-description">Ya existe ese usuario por favor escoja otro</h6>
-                        <%}else{%>
-                            <br>
-                        <%}%>
-                        <label align="center" for="password">Password</label>
-                        <input type="password" name="password" maxlength="30" class="form-control" placeholder="máx. 30"  required/>
-                        <br>
-                        <label align="center" for="supervisor">Dirección</label>
-                        <input type="text" name="direccion" maxlength="30" class="form-control" placeholder="máx. 30"  required/>
-                        <br>
+                        <label align="center" for="nombre">Nombre</label>
+                        <input type="text" name="nombre" maxlength="300" class="form-control" placeholder="máx. 300"  required/>
+                         <br>
+                        <label align="center" for="descripcion">Descripción</label>
+                        <input type="text" name="descripcion" maxlength="300" class="form-control" placeholder="máx. 300"  required/>
                         <br>
                         <button type="submit" class="btn tm-bordered-btn pull-xs-center">Agregar</button>
-                        <a class="btn tm-bordered-btn pull-xs-center" href="menu.html" role="button">Volver</a>
-                    </div>   
-                        
-                </form>   
+                        <a class="btn tm-bordered-btn pull-xs-center" href="menu.jsp" role="button">Volver</a>
+                    </form>  
+
+                </div>                         
+
 
             </section>
-            
-            
+
+
 
         </div>
 
