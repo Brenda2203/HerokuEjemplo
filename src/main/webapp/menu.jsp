@@ -1,3 +1,13 @@
+<%@page import="model.Trabajador"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    HttpSession sesion = request.getSession();
+    Trabajador usuario = (Trabajador)sesion.getAttribute("usuario");
+    if( usuario == null){
+      response.sendRedirect("index.jsp");
+    }else{ 
+
+%>
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +36,7 @@
         <div class="row tm-section tm-blue-bg-row">
             <section>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-xs-center">
-                    <h2 class="tm-section-title">Menú</h2>   
+                    <h2 class="tm-section-title">MenÃº</h2>   
                     <br><br>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -127,10 +137,11 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <p class="text-xs-center tm-copyright-text">Sara Chamseddine, Brenda Méndez, Óscar Romero © (2017)</p>
+                    <p class="text-xs-center tm-copyright-text">Sara Chamseddine, Brenda MÃ©ndez, Ã“scar Romero Â© (2017)</p>
                 </div>
             </div>
 
         </div>
     </body>
 </html>
+<%}%>

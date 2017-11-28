@@ -1,8 +1,15 @@
+<%@page import="model.Trabajador"%>
 <%@page import="model.Terminado"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!DOCTYPE html>
+<%
+    HttpSession sesion = request.getSession();
+    Trabajador usuario = (Trabajador)sesion.getAttribute("usuario");
+    if( usuario == null){
+      response.sendRedirect("index.jsp");
+    }else{ 
+
+%>
 
 <!DOCTYPE html>
 <html>
@@ -77,3 +84,4 @@
 
 </body>
 </html>
+<%}%>
