@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+     <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>Controlador.Login</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>Usuario</servlet-name>
         <servlet-class>Controlador.Usuario</servlet-class>
@@ -60,6 +64,30 @@
         <servlet-name>HorarioM</servlet-name>
         <servlet-class>Controlador.HorarioM</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProblemaC</servlet-name>
+        <servlet-class>Controlador.ProblemaC</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProblemaM</servlet-name>
+        <servlet-class>Controlador.ProblemaM</servlet-class>
+    </servlet>
+    
+    
+    <servlet>
+        <servlet-name>QuejaC</servlet-name>
+        <servlet-class>Controlador.QuejaC</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuejaM</servlet-name>
+        <servlet-class>Controlador.QuejaM</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>QuejaZ</servlet-name>
+        <servlet-class>Controlador.QuejaZ</servlet-class>
+    </servlet>
+    
     <servlet>
         <servlet-name>TerminadoC</servlet-name>
         <servlet-class>Controlador.TerminadoC</servlet-class>
@@ -128,6 +156,41 @@
         <servlet-name>HorarioM</servlet-name>
         <url-pattern>/HorarioM</url-pattern>
     </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>ProblemaC</servlet-name>
+        <url-pattern>/ProblemaC</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProblemaM</servlet-name>
+        <url-pattern>/ProblemaM</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet-mapping>
+        <servlet-name>ProblemaC</servlet-name>
+        <url-pattern>/ProblemaC</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProblemaM</servlet-name>
+        <url-pattern>/ProblemaM</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet-mapping>
+        <servlet-name>QuejaC</servlet-name>
+        <url-pattern>/QuejaC</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuejaM</servlet-name>
+        <url-pattern>/QuejaM</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>QuejaZ</servlet-name>
+        <url-pattern>/QuejaZ</url-pattern>
+    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>TerminadoC</servlet-name>
         <url-pattern>/TerminadoC</url-pattern>
@@ -135,6 +198,11 @@
     <servlet-mapping>
         <servlet-name>TerminadoM</servlet-name>
         <url-pattern>/TerminadoM</url-pattern>
+    </servlet-mapping>
+   
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
