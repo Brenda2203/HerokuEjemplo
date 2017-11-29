@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import dao.QuejaDAO;
@@ -11,6 +6,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.CartQuejas;
 import model.Queja;
 import model.Trabajador;
 
@@ -90,16 +88,23 @@ public class QuejaC extends HttpServlet {
         int idU = Integer.parseInt(request.getParameter("idU"));
         String nombre = request.getParameter("nombre");
         String descripcion = request.getParameter("descripcion");
-        try {
-            QuejaDAO q = new QuejaDAO();
-            Queja quejaCrear = new Queja();
-            quejaCrear.setIdUsuario(idU);
-            quejaCrear.setNombre(nombre);
-            quejaCrear.setDescripcion(descripcion);
-            q.addQueja(quejaCrear);
-        } catch (URISyntaxException | SQLException ex) {
-            Logger.getLogger(QuejaC.class.getName()).log(Level.SEVERE, null, ex);
+        HttpSession session = request.getSession();
+        CartQuejas shoppingCart;
+        shoppingCart = (CartQuejas) session.getAttribute("cart");
+        if (shoppingCart == null) {
+            shoppingCart = new CartQuejas();
+            session.setAttribute("cart", shoppingCart);
         }
+
+        //QuejaDAO q = new QuejaDAO();
+        Queja quejaCrear = new Queja();
+        quejaCrear.setIdQueja(UUID.randomUUID().hashCode());
+        quejaCrear.setIdUsuario(idU);
+        quejaCrear.setNombre(nombre);
+        quejaCrear.setDescripcion(descripcion);
+        shoppingCart.addToCart(quejaCrear.getIdQueja() + "", quejaCrear);
+        //q.addQueja(quejaCrear);
+        session.setAttribute("cart", shoppingCart);
 
         ArrayList<Trabajador> trabajadores = new ArrayList();
 

@@ -1,5 +1,6 @@
 <%@page import="model.Trabajador"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="model.Queja"%>
+<%@page import="model.CartQuejas"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%
     HttpSession sesion = request.getSession();
@@ -7,6 +8,20 @@
     if( usuario == null){
       response.sendRedirect("index.jsp");
     }else{ 
+
+%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+
+<%
+    CartQuejas shoppingCart;
+        shoppingCart = (CartQuejas) session.getAttribute("cart");
+        if(shoppingCart == null){
+          shoppingCart = new CartQuejas();
+          session.setAttribute("cart", shoppingCart);
+        }
+        
+        HashMap<String, Queja> items = shoppingCart.getCartQuejas();
 
 %>
 
@@ -51,7 +66,8 @@
 
                 </div>
                 <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 tm-form-group-left">
-                    <form align="center" action="QuejaC" method="POST" class="tm-contact-form"> 
+                    <form align="center" action="QuejaC" method="POST" class="tm-contact-form">
+                        <!-- <form align="center" action="QuejaC" method="POST" class="tm-contact-form"> -->
                         <label align="center" for="idU">Trabajador</label>
                         <select name="idU" class="form-control form-control-lg">
                             <%
@@ -86,6 +102,58 @@
         </div>
 
     </div>
+    <div class="container">
+
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="invisible">Id Queja</th>
+                    <th>Id Usuario</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    for(String key: items.keySet()){
+                %>
+                <tr>
+                    <td class="invisible"><%= items.get(key).getIdQueja() %></td>
+                    <td><%= items.get(key).getIdUsuario() %></td>
+                    <td><%= items.get(key).getNombre() %></td>
+                    <td><%= items.get(key).getDescripcion() %></td>
+                    <td>
+                        <form align="center" action="QuejaM" method="GET" class="tm-contact-form"> 
+                            <input type="text" name="idQ" class="invisible" value="<%= items.get(key).getIdQueja() %>" />
+                            <button type="submit" class="btn btn-sm tm-bordered-btn pull-xs-center">Eliminar</button>
+                        </form>
+
+                    </td>
+                </tr>
+
+                <%
+                    }
+                %>
+
+
+
+            </tbody>
+
+
+        </table>
+        <div class="text-center">
+            <form align="center" action="QuejaZ" method="POST" class="tm-contact-form">
+                <button type="submit" class="btn btn-sm tm-bordered-btn pull-xs-center">Guardar Quejas</button>
+            </form>
+
+        </div>
+
+
+    </div>
+
+
 
 </body>
 </html>
